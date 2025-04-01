@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"> <!-- Legacy Support -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Nano Market</title>
+    <meta name="description" content="Buy and sell goods and services using the NANO cryptocurrency.">
+    <script src="/tailwind.css"></script>
+    <script src="/scriptcountries2.js"></script>
+    <style>
+        #searchForm {
+            margin-left: 50px;
+        }
+        #countries {
+            margin-left: 50px;
+            margin-top: 10px;
+            background-color: black;
+            color: white;
+        }
+        .pagination-buttons {
+            display: flex;
+            justify-content: center;  /* Centers buttons horizontally */
+            align-items: center;      /* Vertically aligns the buttons to the center */
+            gap: 20px;                /* Adds space between the buttons */
+            margin-top: 30px;         /* Adds space above the pagination */
+        }
+        #symbol {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <main>
+        <!-- Search Form -->
+        <form id="searchForm">
+            <input type="text" id="searchInput" name="query" placeholder="Search tags..." required>
+            <button id="searchButton" type="submit">Search</button>
+        </form>
+
+        <select id="countries">
+        <option value="">Select Region</option>
+        <!-- Options will be added dynamically -->
+        </select>
+
+        <!-- Item Grid -->
+        <div class="item-grid">
+            #foreach($item in $data)
+            <div class="item-card" onclick="window.location='/listing/$item.id'">
+                <h2 class="item-title">
+                    <a href="/listing/$item.id">$item.title</a>
+                </h2>
+                <div class="item-details">
+                    <p class="item-price"><b id="symbol" style="color: #209ce9;">Ӿ$item.cost</b></p>
+                    <p class="item-quantity">✈️<br>$item.country</p>
+                </div>
+                <div class="item-image">
+                    #if($item.image)
+                        <img src="data:image/png;base64,$item.image" alt="Item Image" />
+                    #else
+                        <span>No Image</span>
+                    #end
+                </div>
+            </div>
+            #end
+        </div>
+
+        <!-- Pagination Buttons -->
+        <div class="pagination-buttons flex justify-between mt-6">
+            <button id="backButton" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded hidden">
+                Back
+            </button>
+
+            #if($next == "true")
+                <button id="nextButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Next
+                </button>
+            #end
+        </div>
+
+    </main>
+
+    <!-- Load Header & Footer -->
+    <script>
+
+        // Debugging: Alert values of data.next and data.back
+        let dataNext = "$next"; // This should be "true" or "false"
+        let dataBack = "$back"; // Now referencing $back directly (not from $data)
+        //alert("Debug Info:\nNext: " + dataNext + "\nBack: " + dataBack);
+
+        /*
+        // Load Header
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => document.getElementById("header-placeholder").innerHTML = html);
+
+        */
+
+        // Load Footer
+        fetch("/footer.html")
+            .then(response => response.text())
+            .then(html => document.getElementById("footer-container").innerHTML = html);
+
+        // Handle Search Form Submission
+        document.getElementById('searchForm').onsubmit = function(e) {
+            e.preventDefault();
+            var query = document.getElementById('searchInput').value;
+            if (query) {
+                        if(localStorage.getItem("country") === "All") {
+                            window.location.href = '/search/' + encodeURIComponent(query);
+                        }
+                        else {
+                            window.location.href = '/search/' + localStorage.getItem("country") + "/" + encodeURIComponent(query);
+                        }
+            }
+        };
+
+        // Handle Pagination Buttons
+        document.addEventListener("DOMContentLoaded", function () {
+            const backButton = document.getElementById("backButton");
+            const nextButton = document.getElementById("nextButton");
+
+            let currentUrl = window.location.pathname;
+            let pathSegments = currentUrl.split("/").filter(Boolean);
+            let lastSegment = pathSegments.length ? pathSegments[pathSegments.length - 1] : "";
+            let isLastSegmentNumber = /^\d+$/.test(lastSegment);
+
+            let currentPage = isLastSegmentNumber ? parseInt(lastSegment) : 0;
+            let nextPage = currentPage + 1;
+            let prevPage = currentPage > 1 ? currentPage - 1 : null;
+
+            // Show back button if there's a previous page
+            if (isLastSegmentNumber && prevPage !== null) {
+                backButton.classList.remove("hidden");
+
+                // If the current page is 2, clicking "Back" will reset to the base URL "/"
+                if (currentPage === 2) {
+                    backButton.onclick = () => {
+                        window.location.href = '/'; // Reset to base URL
+                    };
+                } else {
+                    backButton.onclick = () => {
+                        window.location.href = `/page/${prevPage}${window.location.search}`;
+                    };
+                }
+            }
+
+            // Show next button if `$next == "true"`
+            if (dataNext === "true" && nextButton) {
+                if (currentPage === 0) {
+                    // If on the base URL, next page should go to page 2, not page 1
+                    nextButton.onclick = () => {
+                        window.location.href = `/page/2${window.location.search}`;
+                    };
+                } else {
+                    nextButton.onclick = () => {
+                        window.location.href = `/page/${nextPage}${window.location.search}`;
+                    };
+                }
+            }
+        });
+
+        // Load the header HTML into the page first
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // Now that the header is loaded, we can attach the event listener for the burger menu
+                const menuToggle = document.getElementById("menu-toggle");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                console.log("Menu Toggle: ", menuToggle);
+                console.log("Mobile Menu: ", mobileMenu);
+
+                if (menuToggle && mobileMenu) {
+                    menuToggle.addEventListener("click", function () {
+                        console.log("Burger menu clicked!");
+                        mobileMenu.classList.toggle("hidden"); // Toggle visibility of the mobile menu
+                    });
+                } else {
+                    console.error("Menu Toggle or Mobile Menu element not found.");
+                }
+            }); 
+         </script>
+
+    <div id="footer-container"></div>
+
+</body>
+</html>
+

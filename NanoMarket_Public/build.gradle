@@ -1,0 +1,53 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+plugins {
+    	id 'java'
+    	id "org.gradle.java"
+	id 'application'
+	id("com.github.johnrengelman.shadow") version "6.0.0"
+}
+
+apply plugin: 'war'
+
+version '1'
+mainClassName = 'market.Main'
+
+repositories {
+    	mavenCentral()
+}
+shadowJar {
+
+    archiveBaseName = 'market'
+    archiveClassifier = ''
+    archiveVersion = ''
+	doLast {
+       		// Set the desired name for the generated JAR file
+        	archiveFileName.set("market.jar")
+   	 }
+ 
+}
+
+tasks.jar {
+    manifest.attributes["Main-Class"] = "faucet.Main"
+}
+
+
+dependencies {
+//    implementation 'org.slf4j:slf4j-api:2.0.9'
+//    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+    implementation group: 'org.rocksdb', name: 'rocksdbjni', version: '9.10.0'
+    implementation 'com.sun.mail:jakarta.mail:2.0.1'
+    implementation 'org.apache.velocity.tools:velocity-tools-generic:3.1'
+    implementation 'org.apache.velocity:velocity-engine-core:2.3'
+    implementation 'com.sparkjava:spark-template-velocity:2.7.1'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+	implementation 'com.google.code.gson:gson:2.8.9'
+ 	implementation 'com.sparkjava:spark-core:2.9.3'
+	implementation 'uk.oczadly.karl:jnano:2.20.1'
+  	implementation 'com.talanlabs:avatar-generator:1.1.0'
+    implementation 'com.talanlabs:avatar-generator-8bit:1.1.0'
+	//implementation 'ch.qos.logback:logback-classic:1.2.6'
+}
+

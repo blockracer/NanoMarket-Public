@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/tailwind.css"></script>
+    <title>Listing</title>
+    <style>
+
+#title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+
+    h1 { font-size: 2rem !important; font-weight: bold !important; }
+    h2 { font-size: 1.75rem !important; font-weight: semibold !important; color: white }
+    h3 { font-size: 1.5rem !important; font-weight: semibold !important; }
+        body {
+            background-color: black;
+            color: black;
+            margin: 0; 
+           /* padding: 20px; */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+            max-width: 900px;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-left: auto;
+            background: #181a1b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .image-container {
+            display: flex;
+            text-align: center;
+            margin: 20px 0;
+            justify-content: center; /* Center horizontally */
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 300px;
+            /*height: auto; */ 
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .buy-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .buy-button-container button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buy-button-container button:hover {
+            background-color: #218838;
+        }
+
+        pre {
+            background: #181a1b;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        /* For mobile responsiveness */
+        /* For mobile responsiveness */
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 100%;
+    }
+
+    table {
+        width: 100%;
+        display: block; /* Allow the table to stack on small screens */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+        white-space: normal; /* Allow wrapping of content */
+    }
+
+    table, th, td {
+        border: 1px solid #ddd; /* Add borders for better readability */
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px; /* Adjust padding to avoid excessive spacing */
+        text-align: left;
+        word-wrap: break-word; /* Ensure long words break and wrap */
+        word-break: break-word; /* Break words if they are too long */
+    }
+
+    td {
+        display: block;
+        text-align: left;
+        padding: 10px; /* Adjust padding */
+        border-bottom: 1px solid #ddd; /* Add a bottom border to separate rows */
+    }
+
+    td::before {
+        content: attr(data-label); /* Add labels for data in each cell */
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .buy-button-container {
+        padding: 0 10px;
+        text-align: center; /* Align the button to the left */
+    }
+
+    .buy-button-container button {
+        width: auto;
+        max-width: 250px;
+        padding: 12px 20px;
+        font-size: 16px;
+        text-align: center;
+        margin: 0; /* Remove automatic centering */
+    }
+     
+}
+
+
+}
+
+        
+            </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="container">
+        <h2 id="title">$data.title</h2>
+        <div class="image-container">
+            #if($data.image)
+            <!-- <img src="data:image/png;base64,$data.image" alt="Image"/> -->
+            <!-- <img src="data:image/*;base64,$data.image" alt="Image"/> -->
+                <img src="data:$data.mimeType;base64,$data.image" alt="Image"/>
+            #else
+                No Image Available
+            #end
+        </div>
+
+                <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    <tr><td><strong>Country</strong></td><td id="id">$data.country</td></tr>
+                    <tr><td><strong>ID</strong></td><td id="id">$data.id</td></tr>
+                    <tr><td><strong>Cost</strong></td><td id="cost">Ӿ$data.cost</td></tr>
+                    <tr><td><strong>Quantity</strong></td><td id="quantity">$data.quantity</td></tr>
+                    <tr><td><strong>Date listed</strong></td><td id="timestamp">$data.date</td></tr>
+                    <tr><td><strong>Details</strong></td><td>Seller: $data.seller<br>Escrow Address: $data.address</td></tr>
+                    <tr><td><strong>Tags</strong></td><td id="tags">$data.tag1, $data.tag2, $data.tag3</td></tr>
+                    <tr>
+                        <td colspan="2" class="buy-button-container">
+                            <a href="/buy"><button id="buyButton">Buy Now</button></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      
+                <pre id="description">Loading...</pre>
+
+    </div>
+    <script>
+        localStorage.setItem('quantity', '$data.quantity');
+        localStorage.setItem('cost', '$data.cost');
+        localStorage.setItem('buyID', '$data.id');
+        console.log(localStorage.getItem('quantity'));
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("description").textContent = decodeBase64("$data.description");
+        });
+        /*
+        function decodeBase64(encodedString) {
+            return atob(encodedString).replace(/^"(.*)"$/, '$1');
+        }
+       */
+        function decodeBase64(base64) {
+            return decodeURIComponent(escape(atob(base64)));
+        }
+         // Load the header HTML into the page first
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // Now that the header is loaded, we can attach the event listener for the burger menu
+                const menuToggle = document.getElementById("menu-toggle");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                console.log("Menu Toggle: ", menuToggle);
+                console.log("Mobile Menu: ", mobileMenu);
+
+                if (menuToggle && mobileMenu) {
+                    menuToggle.addEventListener("click", function () {
+                        console.log("Burger menu clicked!");
+                        mobileMenu.classList.toggle("hidden"); // Toggle visibility of the mobile menu
+                    });
+                } else {
+                    console.error("Menu Toggle or Mobile Menu element not found.");
+                }
+            });
+
+        document.addEventListener("DOMContentLoaded", function() {
+    const buyButton = document.getElementById("buyButton");
+    const quantity = parseInt(localStorage.getItem('quantity'), 10);
+    console.log("QUAN: " + quantity);
+
+    if (quantity === 0) {
+        buyButton.style.display = "none"; // Hide the button
+    }
+});
+
+            </script>
+            <div id="footer-container"></div>
+<script>
+    fetch("/footer.html")
+        .then(response => response.text())
+        .then(html => document.getElementById("footer-container").innerHTML = html);
+</script>
+
+</body>
+</html>
+
