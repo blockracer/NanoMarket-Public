@@ -1,10 +1,10 @@
+# NanoMarket-Public
+Nano Market
+
 Requirements:
 
 Gradle 7.2
 java 11+
-
-# NanoMarket-Public
-Nano Market
 
 
 ## Configuration Instructions
