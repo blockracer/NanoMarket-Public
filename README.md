@@ -53,3 +53,21 @@ To configure WebSockets, update the following:
 
 Make sure these settings are correctly configured before running the application.
 You also need to edit the HttpRequests.java with your own configuration for your email credentials and the http request for sending NANO (it should be the send method but needs to be configured/modified to fit your own route or method of sending the nano)
+
+### **Build the project**
+```sh
+gradle build
+```
+
+### **Run the application**
+```sh
+gradle run
+```
+
+### **Run the application manually after building**
+```sh
+java -jar build/libs/market.jar
+```
+
+Ensure all configurations are set before running the application.
+
