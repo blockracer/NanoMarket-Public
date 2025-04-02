@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="/node_modules/browser-image-compression/dist/browser-image-compression.js"></script>
+    <script src="/scriptcountries.js"></script>
+    <title>Submit Data</title>
+    <style>
+        #result {
+            color: red;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+       
+        #logo-container {
+            text-align: center;
+        }
+
+        #logo {
+            max-width: 150px; /* Adjust as needed */
+        }
+
+        .navbar {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .form-container {
+            color: black;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        textarea, input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #submit {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                padding: 15px;
+                border-radius: 4px;
+            }
+
+            textarea {
+                resize: vertical;
+            }
+        }
+    </style>
+    <script defer src="prepopulate.js"></script>
+</head>
+<body>
+        <div id="header-placeholder"></div>
+        <div class="form-container">
+        <form id="dataForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required maxlength="50">
+
+             <select id="countries" name="countries" required>
+                <option value="">Select a country</option> <!-- Default empty option -->
+            </select>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+             <small id="charCount">10000 characters remaining</small>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="tag1">Tag 1:</label>
+            <input type="text" id="tag1" name="tag1" maxlength="15">
+
+            <label for="tag2">Tag 2:</label>
+            <input type="text" id="tag2" name="tag2" maxlength="15">
+
+            <label for="tag3">Tag 3:</label>
+            <input type="text" id="tag3" name="tag3" maxlength="15">
+            <label for="image">Image: If no file chosen current image will be used</label>
+            <input type="file" id="image" name="image" accept="image/png, image/jpeg, image/gif">
+
+            <button id="submit" type="submit">Submit</button>
+        </form>
+    </div>
+    <center>  <div id="result"></div> </center>
+    <div id="resultDiv"></div>
+    <script>
+        // Fetch and load the header from header.html
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // Handle mobile menu toggle if needed
+                const menuToggle = document.getElementById("menu-toggle");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                if (menuToggle && mobileMenu) {
+                    menuToggle.addEventListener("click", function () {
+                        mobileMenu.classList.toggle("hidden");
+                    });
+                }
+            });
+    </script>
+        <div id="footer-container"></div>
+    <script>
+    fetch("/footer.html")
+        .then(response => response.text())
+        .then(html => document.getElementById("footer-container").innerHTML = html);
+</script>
+</body>
+</html>
+

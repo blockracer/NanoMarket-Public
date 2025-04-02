@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Market Information</title>
+    <style>
+    h1 { font-size: 2rem !important; font-weight: bold !important; }
+    h2 { font-size: 1.75rem !important; font-weight: semibold !important; }
+    h3 { font-size: 1.5rem !important; font-weight: semibold !important; }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: black;
+        }
+        /*
+        header {
+            text-align: center;
+            padding: 10px 0;
+            background: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        */
+        #logo {
+            max-width: 150px; /* Adjust as needed */
+        }
+        .navbar {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            margin: 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+        /*
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        */
+        .container {
+            color: white;
+            width: 90%;
+            max-width: 800px;
+            background: #181a1b;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Align text to the left within the container */
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            margin: 0 0 10px;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        /*
+        a:hover {
+            text-decoration: underline;
+        }
+        */
+        .contact-info {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .contact-info a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+        <script src="/tailwind.css"></script>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+         <div class="container">
+<body>
+    <h1>About Nano Market</h1>
+    <p>Nano Market is a unique marketplace where anyone can buy and sell goods or services using Nano—no registration required.</p>
+
+    <h2>How It Works</h2>
+<p>Unlike traditional marketplaces, Nano Market does not rely on an arbitrator to resolve disputes. Instead, both the buyer and seller must each provide 100% collateral, equal to the cost of the transaction. This ensures both parties have a financial stake in fulfilling their obligations, as failing to do so results in the loss of collateral.</p>
+<p>Once a transaction is completed, the buyer has full control over releasing both the payment and collateral from Nano Market's escrow system. This guarantees that sellers deliver as promised and that buyers receive their goods or services as expected.</p>
+<h3>Payment Process</h3>
+<p>1️⃣ The seller lists an item and pays 100% collateral.</p>
+<p>2️⃣ The buyer purchases the item, paying 200% (100% for the item + 100% collateral).</p>
+<p>3️⃣ The seller ships the item or delivers the digital goods.</p>
+<p>4️⃣ The buyer approves the transaction, and funds are released:</p>
+<ul>
+  <li>The buyer gets 100% back.</li>
+  <li>The seller receives 195% (100% collateral + 100% payment - 5% fee).</li>
+</ul>
+
+        <h2>Dispute Resolution</h2>
+    <p>In the rare case of a dispute, the buyer and seller must communicate via email to find a resolution. The buyer has the sole authority to unlock funds, encouraging sellers to work toward a satisfactory outcome. There are no arbitrators or third parties, only mutual accountability enforced by collateral. <b style="color: red;">The buyer also has 45 days to approve an order or else all funds will be permanently locked.</b></p>
+
+    <h2>Communication & Shipping</h2>
+    <p>All transaction details, including shipping arrangements, must be communicated between the buyer and seller via email. Nano Market does not facilitate shipping or logistics, so both parties are responsible for coordinating the delivery of goods or services.</p>
+
+    <h2>For Sellers</h2>
+    <p>If you're a seller, you must deposit full collateral before listing an item or service. You may cancel a listing at any time by clicking the cancellation link in your email, which will instantly return your collateral. <b style=" color: red;";>The selling of illegal items will result in your item being delisted and a loss of your collateral.</b></p>
+
+    <p>Nano Market's 100% collateral system ensures fair transactions, eliminates fraud, and promotes trust between buyers and seller, all without an arbitrator.</p>
+
+
+    <p><strong>Nano Market takes a 5% fee for each sale.</strong></p>
+</body>
+</html>
+
+
+         
+        <div class="contact-info">
+            <p>If you have any questions, please feel free to contact us at <a href="mailto:blockracer@nanoriver.io">blockracer@nanoriver.io</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // Now that the header is loaded, we can attach the event listener
+                const menuToggle = document.getElementById("menu-toggle");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                // Log to check if elements are found correctly
+                console.log("Menu Toggle: ", menuToggle);
+                console.log("Mobile Menu: ", mobileMenu);
+
+                if (menuToggle && mobileMenu) {
+                    menuToggle.addEventListener("click", function () {
+                        // Log toggle action
+                        console.log("Burger menu clicked!");
+                        mobileMenu.classList.toggle("hidden"); // Toggles visibility of the mobile menu
+                    });
+                } else {
+                    console.error("Menu Toggle or Mobile Menu element not found.");
+                }
+            });
+    </script>
+
+    <div id="footer-container"></div>
+<script>
+    fetch("/footer.html")
+        .then(response => response.text())
+        .then(html => document.getElementById("footer-container").innerHTML = html);
+</script>
+
+
+</body>
+</html>
+

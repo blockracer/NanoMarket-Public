@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/tailwind.css"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>WebSocket Connection</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script defer src="websocketBuyer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/5.2.2/big.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        #qr-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none; /* Initially hidden */
+        }
+        #qr-box {
+            background-color: white;
+            padding: 32px; /* Space around the QR code */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #qrcode {
+            width: 128px; /* QR code size */
+            height: 128px; /* QR code size */
+        }
+        #debug-log {
+            margin-top: 20px;
+            visibility: hidden;  
+            background-color: black;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        #debug-log p {
+            margin: 0;
+            font-size: 14px;
+        }
+        #timer {
+            font-size: 24px;
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 100%;
+    }
+
+    table {
+        width: 100%;
+        display: block; /* Allow the table to stack on small screens */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+        white-space: normal; /* Allow wrapping of content */
+    }
+
+    table, th, td {
+        border: 1px solid #ddd; /* Add borders for better readability */
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px; /* Adjust padding to avoid excessive spacing */
+        text-align: left;
+        word-wrap: break-word; /* Ensure long words break and wrap */
+        word-break: break-word; /* Break words if they are too long */
+    }
+
+    td {
+        display: block;
+        text-align: left;
+        padding: 10px; /* Adjust padding */
+        border-bottom: 1px solid #ddd; /* Add a bottom border to separate rows */
+    }
+
+    td::before {
+        content: attr(data-label); /* Add labels for data in each cell */
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .table-responsive {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    
+}
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    
+    <div class="table-responsive mx-auto" style="width: fit-content;">
+    <table class="table table-bordered table-striped text-center">
+        <tbody>
+            <tr>
+            </tr>
+            <tr>
+                <td colspan="2"><div id="messages" class="messages"></div>
+                    <center><p><br>Tap QR to open Nano wallet. </p> </center>
+                    <div id="qr-container">
+                     <div id="qr-box">
+                        <div id="qrcode"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><div id="timer" class="timer"></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <div id="debug-log">
+        <p>Debug Log:</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const timerElement = document.getElementById('timer');
+    let timerInterval;
+
+    function startCountdown(targetUnixTimestamp) {
+        stopCountdown(); // Ensure no duplicate timers
+
+        timerInterval = setInterval(function () {
+            const now = Math.floor(Date.now() / 1000);
+            let remaining = targetUnixTimestamp - now;
+
+            if (remaining <= 0) {
+                timerElement.textContent = "Time's up!";
+                stopCountdown();
+                return;
+            }
+
+            let minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
+            let seconds = String(remaining % 60).padStart(2, '0');
+            timerElement.textContent = `${minutes}:${seconds}`;
+        }, 1000);
+    }
+
+    function stopCountdown() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+    }
+
+    // Set target time (10 minutes from now)
+    const targetTimestamp = Math.floor(Date.now() / 1000) + 600;
+    localStorage.setItem('targetTime', targetTimestamp);
+    startCountdown(targetTimestamp);
+});
+
+        // Fetch and load the header from header.html
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // Handle mobile menu toggle if needed
+                const menuToggle = document.getElementById("menu-toggle");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                if (menuToggle && mobileMenu) {
+                    menuToggle.addEventListener("click", function () {
+                        mobileMenu.classList.toggle("hidden");
+                    });
+                }
+            });
+
+            </script>
+
+                <div id="footer-container"></div>
+<script>
+    fetch("/footer.html")
+        .then(response => response.text())
+        .then(html => document.getElementById("footer-container").innerHTML = html);
+</script>
+</body>
+</html>
+

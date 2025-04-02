@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Purchase Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="script.js"></script>
+    <script src="/tailwind.css"></script>
+    <style>
+    /* Center the form container */
+        .form-container {
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        /* Form styling */
+        form {
+            justify-content: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            color: black;
+            width: 100%;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div class="form-container">
+        <form id="purchaseForm">
+            <center><h1>Listing Form</h1> </center>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required maxlength="50">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value = "1" required>
+            <label for="itemcost">Item Cost in NANO(0.01 increments):</label>
+            <input type="number" id="itemcost" name="itemcost" step="0.01" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        // Fetch and load the header from header.html
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // Handle mobile menu toggle if needed
+                const menuToggle = document.getElementById("menu-toggle");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                if (menuToggle && mobileMenu) {
+                    menuToggle.addEventListener("click", function () {
+                        mobileMenu.classList.toggle("hidden");
+                    });
+                }
+            });
+    </script>
+        <div id="footer-container"></div>
+<script>
+    fetch("/footer.html")
+        .then(response => response.text())
+        .then(html => document.getElementById("footer-container").innerHTML = html);
+</script>
+</body>
+</html>
+

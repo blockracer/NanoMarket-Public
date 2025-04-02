@@ -1,0 +1,29 @@
+<header class="bg-gray-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Logo and Title -->
+        <a href="/" class="flex items-center space-x-2">
+            <img src="/marketIcon.png" alt="Nano Market Logo" class="h-12 w-auto"> 
+            <span class="text-2xl font-bold text-blue-500">Nano Market</span>
+        </a>
+
+        <!-- Navigation Menu (For Desktop) -->
+        <nav class="hidden md:flex space-x-6" id="nav-menu">
+            <a href="/" class="text-white hover:text-gray-300 transition">Home</a>
+            <a href="/sell.html" class="text-white hover:text-gray-300 transition">Sell</a>
+            <a href="/about.html" class="text-white hover:text-gray-300 transition">About</a>
+        </nav>
+
+        <!-- Mobile Menu Button (Only visible on mobile) -->
+        <button id="menu-toggle" class="md:hidden text-white text-2xl">
+            ☰
+        </button>
+    </div>
+
+    <!-- Mobile Menu (Initially hidden on mobile) -->
+    <nav id="mobile-menu" class="hidden flex flex-col items-center bg-gray-800 md:hidden">
+        <a href="/" class="block py-2 w-full text-center hover:bg-gray-700">Home</a>
+        <a href="/sell.html" class="block py-2 w-full text-center hover:bg-gray-700">Sell</a>
+        <a href="/about.html" class="block py-2 w-full text-center hover:bg-gray-700">About</a>
+    </nav>
+</header>
+

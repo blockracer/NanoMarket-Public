@@ -1,0 +1,308 @@
+#itemTable {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%; /* Adjust the width as needed */
+        margin: 0 auto; /* Center the table horizontally */
+        border-collapse: collapse; /* Optional: Collapses borders for a cleaner look */
+        text-align: center; /* Optional: Center text inside the table */
+}
+#itemDetailsTable {
+        /*margin-left: auto;
+        margin-right: auto;
+        */
+        width: 40%; /* Adjust the width as needed */
+        margin: 0 auto; /* Center the table horizontally */
+        border-collapse: collapse; /* Optional: Collapses borders for a cleaner look */
+        text-align: center; /* Optional: Center text inside the table */
+
+
+}
+#message {
+    background-color: black;
+    color: white;
+}
+table {
+    text-align: center;
+}
+body {
+    background-color: black;
+    color: white;
+}
+
+#menu-toggle {
+    touch-action: manipulation;
+}
+
+/* nav-styles.css */
+
+nav {
+    background-color: black; /* Dark background color */
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid transparent;
+}
+
+nav a {
+    color: #ffffff;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    color: #3498db; /* Highlight link color on hover */
+    background-color: #2c3e50; /* Darker background on hover */
+}
+/*
+@media (max-width: 600px) {
+    nav {
+        display: block;
+        margin-top: -30px;
+        position: sticky;
+    }
+    .navbar a {
+        color: #fff;
+        padding: 14px 20px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    select {
+        display: none;
+    }
+    .navlink {
+        display: none;
+    }
+    .size {
+        font-size: 100px;
+    }
+    
+}
+*/
+
+
+#logo-container {
+    top: 50%;
+    left: 50%;
+}
+#logo {
+    max-width: 256px;
+    height: auto;
+    margin-top: 2%;
+}
+/*
+header {
+    background-color: #2c3e50; 
+    background-color: black;
+    color: black;
+    padding: 20px; 
+    text-align: center; 
+    position: relative;
+}
+*/
+.navbar {
+  position: relative; /* Or 'absolute' or 'fixed' depending on your layout */
+  top: 10px; /* Adjust this value as needed to move the nav higher */
+}
+
+
+/* General Styles */
+/*
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+*/
+/*
+header {
+    background-color: black;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd; 
+}
+
+#logo-container {
+    text-align: center;
+}
+
+#logo {
+    max-height: 50px;
+}
+
+.navbar {
+    text-align: center;
+    background-color: black;
+}
+
+.navbar a {
+    color: #fff;
+    padding: 14px 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+form#searchForm {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form#searchForm input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+form#searchForm button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #0079d3;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+form#searchForm button:hover {
+    background-color: #005bb5;
+}
+#buyButton {
+    padding: 20px 40px;
+    font-size: 24px;
+    border: none;
+    background-color: #0079d3;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#searchButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #0079d3;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+#buyButton button:hover {
+    background-color: #005bb5;
+}
+
+/* Item Grid Styles */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+}
+
+.item-card {
+    /*background: #F0FFFF; */
+    background: #181a1b; 
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+}
+
+.item-image {
+    width: 100%;
+    height: 200px; /* Set a fixed height for the container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    /*background-color: #f5f5f5; */
+    background-color: #181a1b;
+
+}
+
+.item-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensure the image is fully visible */
+}
+
+.item-details {
+    padding: 10px;
+}
+
+.item-title {
+    font-size: 18px;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.item-title a {
+    /*color: #0079d3; */
+    color: white;
+    text-decoration: none;
+}
+
+.item-title a:hover {
+    text-decoration: underline;
+}
+
+.item-price {
+    margin-top
+    font-size: 16px;
+    color: white;
+}
+
+.item-quantity {
+    font-size: 14px;
+    color: white;
+}
+pre {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.size {
+    font-size: 40px
+}
+input, select, textarea {
+    font-size: 18px; /* Set font size to 16px or larger */
+}
+#footer-container {
+    color: white;
+}
+#footer-container p {
+    margin 0 0 0;
+
+}
+.footer p {
+    margin 0 0 0;
+}
+footer p {
+    margin: 0;
+}
+
+
+
+
+
+

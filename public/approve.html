@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Market Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: black;
+        }
+        /*
+        header {
+            text-align: center;
+            padding: 10px 0;
+            background: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        */
+        #logo {
+            max-width: 150px; /* Adjust as needed */
+        }
+        .navbar {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            margin: 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left; /* Align text to the left within the container */
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            margin: 0 0 10px;
+        }
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .contact-info {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+        }
+        .contact-info a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+            h1 {
+                font-size: 20px;
+            }
+        }
+        h1 {
+            color: white;
+        }
+    </style>
+        <script src="/tailwind.css"></script>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <center> <h1>You have approved your order! All funds have been unlocked. </h1> </center>
+
+
+             <script>
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("header-placeholder").innerHTML = html;
+
+                // Now that the header is loaded, we can attach the event listener
+                const menuToggle = document.getElementById("menu-toggle");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                // Log to check if elements are found correctly
+                console.log("Menu Toggle: ", menuToggle);
+                console.log("Mobile Menu: ", mobileMenu);
+
+                if (menuToggle && mobileMenu) {
+                    menuToggle.addEventListener("click", function () {
+                        // Log toggle action
+                        console.log("Burger menu clicked!");
+                        mobileMenu.classList.toggle("hidden"); // Toggles visibility of the mobile menu
+                    });
+                } else {
+                    console.error("Menu Toggle or Mobile Menu element not found.");
+                }
+            });
+    </script>
+    <div id="footer-container"></div>
+<script>
+    fetch("/footer.html")
+        .then(response => response.text())
+        .then(html => document.getElementById("footer-container").innerHTML = html);
+</script>
+
+
+</body>
+</html>
